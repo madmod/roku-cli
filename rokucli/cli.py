@@ -6,15 +6,15 @@ from blessed import Terminal
 
 
 usage_menu = (
-        "  +-------------------------------+-------------------------+\n"
-        "  | Back           B or <Backsp>  | Replay          R       |\n"
-        "  | Home           H              | Info/Settings   i       |\n"
-        "  | Left           h or <Left>    | Rewind          r       |\n"
-        "  | Down           j or <Down>    | Fast-Fwd        f       |\n"
-        "  | Up             k or <Up>      | Play/Pause      <Space> |\n"
-        "  | Right          l or <Right>   | Enter Text      /       |\n"
-        "  | Ok/Enter       <Enter>        |                         |\n"
-        "  +-------------------------------+-------------------------+\n"
+        "  +-----------------------------------------+------------------------------+\n"
+        "  | Back           ; or u or b or <Backsp>  | Replay          i or R       |\n"
+        "  | Home           g or G                   | Menu/Settings   m or s       |\n"
+        "  | Left           h or <Left>              | Rewind          r or H       |\n"
+        "  | Down           j or <Down>              | Fast-Fwd        f or L       |\n"
+        "  | Up             k or <Up>                | Play/Pause      p or <Space> |\n"
+        "  | Right          l or <Right>             | Enter Text      /            |\n"
+        "  | Ok/Enter       o or <Enter>             |                              |\n"
+        "  +-----------------------------------------+------------------------------+\n"
         "   (press q to exit)\n")
 
 
@@ -94,24 +94,46 @@ class RokuCLI():
         print(usage_menu)
 
         cmd_func_map = {
-            'B':          self.roku.back,
+            ';':          self.roku.back,
+            'u':          self.roku.back,
+            'b':          self.roku.back,
             'KEY_DELETE': self.roku.back,
-            'H':          self.roku.home,
+
+            'g':          self.roku.home,
+            'G':          self.roku.home,
+
             'h':          self.roku.left,
             'KEY_LEFT':   self.roku.left,
+
             'j':          self.roku.down,
             'KEY_DOWN':   self.roku.down,
+
             'k':          self.roku.up,
             'KEY_UP':     self.roku.up,
+
             'l':          self.roku.right,
             'KEY_RIGHT':  self.roku.right,
+
+            'o':          self.roku.select,
             'KEY_ENTER':  self.roku.select,
+
+            'i':          self.roku.replay,
             'R':          self.roku.replay,
-            'i':          self.roku.info,
+
+            'm':          self.roku.info,
+            's':          self.roku.info,
+
             'r':          self.roku.reverse,
+            'H':          self.roku.reverse,
+
             'f':          self.roku.forward,
+            'L':          self.roku.forward,
+
+            'p':          self.roku.play,
             ' ':          self.roku.play,
-            '/':          self.text_entry}
+
+            '/':          self.text_entry
+        }
 
         # Main interactive loop
         with self.term.cbreak():

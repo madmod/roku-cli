@@ -6,6 +6,10 @@ def discover_roku():
 
     print("Searching for Roku devices within LAN ...")
     rokus = Roku.discover()
+
+    """ Ignore devices that aren't Rokus like Phillips Hue. """
+    rokus = [r for r in rokus if r.port != 80]
+
     if not rokus:
         print("Unable to discover Roku devices. " +
               "Try again, or manually specify the IP address with " +
